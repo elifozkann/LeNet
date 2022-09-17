@@ -105,16 +105,12 @@ import numpy as np
 # predict labels for the test set
 y_test_pred = []
 
-for i in range(len(X_test)):
-  img = X_test[i]
-  img = img.reshape(1,28,28,1)
-  img = img.astype('float32')
-  img = img/255.0
-  # one-hot vector output
-  vec_p = LeNet_model.predict(img)
-  # determine the label corresponding to vector vec_p
-  y_p = np.argmax(vec_p)
-  y_test_pred.append(y_p)
+
+y_pred = LeNet_model.predict(X_test)
+y_test_pred = []
+
+for t in list(y_pred):
+  y_test_pred.append(np.argmax(t))
   
 # convert y_test_pred from list to array
 y_test_pred = np.asarray(y_test_pred)  
